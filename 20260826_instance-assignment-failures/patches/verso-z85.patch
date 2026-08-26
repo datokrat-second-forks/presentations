@@ -1,0 +1,15 @@
+diff --git a/src/verso-util/VersoUtil/BinFiles/Z85.lean b/src/verso-util/VersoUtil/BinFiles/Z85.lean
+index a0ec904..7210cda 100644
+--- a/src/verso-util/VersoUtil/BinFiles/Z85.lean
++++ b/src/verso-util/VersoUtil/BinFiles/Z85.lean
+@@ -31,8 +31,8 @@ Finds the index of the given character in the alphabet.
+
+ Used during decoding.
+ -/
+-private def alphabetChar (i : UInt32) (h : i < 85 := by grind) : Char :=
+-  alphabet[i.toNat]
++private def alphabetChar (i : UInt32) : Char :=
++  alphabet[i.toNat % 85]'(Nat.mod_lt _ (by omega))
+
+ /--
+ Gets the numeric value of a character.

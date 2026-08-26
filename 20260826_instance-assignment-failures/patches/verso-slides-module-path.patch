@@ -1,0 +1,42 @@
+diff --git a/VersoSlides/ModuleExample.lean b/VersoSlides/ModuleExample.lean
+index 76a9b70..e22f68b 100644
+--- a/VersoSlides/ModuleExample.lean
++++ b/VersoSlides/ModuleExample.lean
+@@ -391,6 +391,27 @@ def leanModules : DirectiveExpanderOf ModulesConfig
+       else
+         logBuild "lake build" out
+
++      let leanPathOut ← IO.Process.output {
++        cmd := "elan"
++        args := #["run", "--install", toolchain, "lake", "env", "printenv", "LEAN_PATH"]
++        cwd := some dirname
++        env := lakeEnvBlacklist
++      }
++      if leanPathOut.exitCode != 0 then
++        throwError m!"Failed to determine the example project's LEAN_PATH:\n{leanPathOut.stderr}"
++      let leanPath := leanPathOut.stdout.trimAscii.toString
++      let leanPath := match ← IO.getEnv "LEAN_PATH" with
++        | some parentLeanPath => leanPath ++ ":" ++ parentLeanPath
++        | none => leanPath
++      let mathlibLeanPathOut ← IO.Process.output {
++        cmd := "/root/lean4/julia-minimal/build/release/stage1/bin/lake"
++        args := #["env", "printenv", "LEAN_PATH"]
++        cwd := some "/root/mathlib4/julia-minimal"
++      }
++      if mathlibLeanPathOut.exitCode != 0 then
++        throwError m!"Failed to determine Mathlib's LEAN_PATH:\n{mathlibLeanPathOut.stderr}"
++      let leanPath := leanPath ++ ":" ++ mathlibLeanPathOut.stdout.trimAscii.toString
++
+       let mut addLets : Term → DocElabM Term := fun stx => pure stx
+       let mut hasError := false
+       let mut allHl := Highlighted.empty
+@@ -414,7 +435,7 @@ def leanModules : DirectiveExpanderOf ModulesConfig
+               args := #["run", "--install", toolchain, extractMod.toString] ++
+                 (if server then #[] else #["--not-server"]) ++ #[modName.toString, jsonFile.toString],
+               env := lakeEnvBlacklist ++
+                 #[("LEAN_SRC_PATH", some dirname.toString),
+-                  ("LEAN_PATH", some (dirname / ".lake" / "build" / "lib" / "lean").toString)]
++                  ("LEAN_PATH", some leanPath)]
+             }
+         if out.exitCode != 0 then
+           throwError

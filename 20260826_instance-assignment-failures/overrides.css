@@ -1,0 +1,42 @@
+/* Deck-specific rules on top of /root/presentations/static/custom.css. */
+
+.title-slide .subtitle {
+  font-size: 0.9em;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.85);
+  margin: -0.3em 0 1em 0;
+}
+
+.reveal pre {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+.reveal .count-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.55em;
+  margin-top: 0.8em;
+}
+
+.reveal .count-grid > div {
+  border-left: 0.18em solid #0073a3;
+  padding: 0.2em 0.45em;
+  background: #f3f7f9;
+}
+
+.reveal .count-grid strong {
+  display: block;
+  color: #0073a3;
+  font-size: 1.5em;
+}
+
+.reveal .source {
+  color: #4b5563;
+  font-size: 0.72em;
+}
+
+.reveal .options {
+  font-size: 0.62em;
+}
