@@ -8,10 +8,13 @@ name = "mathlib"
 git = "https://github.com/leanprover-community/mathlib4.git"
 rev = "v4.36.0-rc1"
 
+# A local clone of verso-slides `main` (2d8e2cc) with a fix for let-bound hypotheses in the info
+# panel (branch `panel-let-fallback`). To go back to upstream, use
+#   git = "https://github.com/leanprover/verso-slides.git"
+#   rev = "main"
 [[require]]
 name = "verso-slides"
-git = "https://github.com/leanprover/verso-slides.git"
-rev = "main"
+path = "../../downstream/mathematics-with-lean/verso-slides"
 
 [[lean_lib]]
 name = "Slides"
