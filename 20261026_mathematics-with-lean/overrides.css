@@ -1,0 +1,9 @@
+/* Deck-specific rules on top of ../static/custom.css. */
+
+.title-slide .subtitle {
+  font-size: 0.9em;
+  font-weight: 300;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.85);
+  margin: -0.3em 0 1em 0;
+}
