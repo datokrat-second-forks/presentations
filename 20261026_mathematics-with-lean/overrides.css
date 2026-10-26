@@ -47,3 +47,17 @@ html .reveal .slides section .puzzle-stage .puzzle-pieces.small {
   top: 33.89%;
   width: 38.76%;
 }
+
+/* The timeline uses all of the space below the slide title. The selector beats the theme's
+   `.reveal section img` size limits and reveal.js' image border and margin. */
+html .reveal .slides section img.timeline {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 76vh;
+  margin: 0 auto;
+  border: none;
+  background: none;
+  box-shadow: none;
+}
