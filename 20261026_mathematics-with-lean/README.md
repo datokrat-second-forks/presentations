@@ -44,3 +44,9 @@ change:
 Like the slides, the examples import only the Mathlib modules they need. They are not part of
 the default target. Build them with
 `lake build Examples`.
+
+## Worked examples
+
+`Examples/` contains worked examples of tightening a bound, where Lean marks exactly the part of
+the proof that breaks. Build them with `lake build Examples`. The slides on modifying a proof
+follow `Examples/EuclidPrimeBound.lean`.
