@@ -33,6 +33,9 @@ def main : IO UInt32 := do
   let preloads := puzzleImages.foldl (init := "") fun acc name =>
     acc ++ s!"<link rel=\"preload\" as=\"image\" href=\"images/{name}\">\n    "
   let html := html.replace "</head>" (preloads ++ "</head>")
+  -- Highlights of changed code are written as inline fragments `/- !fragment changed -/`, the only
+  -- inline marker that adds a class. Make them plain spans, so that they take no extra click.
+  let html := html.replace "class=\"fragment changed\"" "class=\"changed\""
   let html := html.replace "Reveal.initialize({" "Reveal.initialize({\n        disableLayout: true,"
   let titleSlideOld := "<section><h2>Mathematics with Lean</h2><p>Paul Reichert</p>"
   let titleSlideNew := "<section class=\"title-slide\"><div class=\"top-area\"><img class=\"logo\" src=\"lean-logo-large.png\" alt=\"Lean Logo\"></div><div class=\"blue-band\"><h1>Mathematics with Lean</h1><div class=\"subtitle\">Proof Mechanization as a Research Tool</div><div class=\"meta\"><strong>Paul Reichert</strong><br>Research Software Engineer, Lean FRO</div></div>"

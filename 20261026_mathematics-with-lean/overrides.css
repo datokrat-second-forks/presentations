@@ -61,3 +61,10 @@ html .reveal .slides section img.timeline {
   background: none;
   box-shadow: none;
 }
+
+/* Changed parts of a proof (inline fragments turned into plain spans in Main.lean). */
+html .reveal .slides section .changed {
+  background: #fde68a;
+  border-radius: 3px;
+  box-shadow: 0 0 0 2px #fde68a;
+}
