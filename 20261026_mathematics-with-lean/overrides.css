@@ -68,3 +68,8 @@ html .reveal .slides section .changed {
   border-radius: 3px;
   box-shadow: 0 0 0 2px #fde68a;
 }
+
+/* The reveal.js theme fixes blockquotes at 70% width; let them span like other text. */
+.reveal blockquote {
+  width: auto;
+}

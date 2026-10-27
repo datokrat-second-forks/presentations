@@ -38,7 +38,7 @@ def main : IO UInt32 := do
   let html := html.replace "class=\"fragment changed\"" "class=\"changed\""
   let html := html.replace "Reveal.initialize({" "Reveal.initialize({\n        disableLayout: true,"
   let titleSlideOld := "<section><h2>Mathematics with Lean</h2><p>Paul Reichert</p>"
-  let titleSlideNew := "<section class=\"title-slide\"><div class=\"top-area\"><img class=\"logo\" src=\"lean-logo-large.png\" alt=\"Lean Logo\"></div><div class=\"blue-band\"><h1>Mathematics with Lean</h1><div class=\"subtitle\">Proof Mechanization as a Research Tool</div><div class=\"meta\"><strong>Paul Reichert</strong><br>Research Software Engineer, Lean FRO</div></div>"
+  let titleSlideNew := "<section class=\"title-slide\"><div class=\"top-area\"><img class=\"logo\" src=\"lean-logo-large.png\" alt=\"Lean Logo\"></div><div class=\"blue-band\"><h1>Mathematics with Lean</h1><div class=\"subtitle\">Proof Formalization as a Research Tool</div><div class=\"meta\"><strong>Paul Reichert</strong><br>Research Software Engineer, Lean FRO</div></div>"
   unless html.contains titleSlideOld do
     throw <| IO.userError "title slide markup changed; update `titleSlideOld` in Main.lean"
   let html := html.replace titleSlideOld titleSlideNew

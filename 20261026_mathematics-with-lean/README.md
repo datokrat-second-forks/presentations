@@ -1,4 +1,4 @@
-# Mathematics with Lean: Proof Mechanization as a Research Tool
+# Mathematics with Lean: Proof Formalization as a Research Tool
 
 Paul Reichert, Lean FRO
 
