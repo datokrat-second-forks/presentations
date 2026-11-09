@@ -3,9 +3,9 @@ import Slides
 
 open VersoSlides
 
-def main (args : List String) : IO UInt32 := do
-  let config : Config := { center := false, margin := 0 }
-  let rc ← slidesMain (config := config) (doc := %doc Slides) (args := args)
+def main : IO UInt32 := do
+  let config : Config := { center := false, margin := 0, theme := "white", slideNumber := true }
+  let rc ← slidesMain (config := config) (doc := %doc Slides)
   let outputDir := config.outputDir
   let cssContents ← IO.FS.readFile "../static/custom.css"
   IO.FS.writeFile (outputDir / "custom.css") cssContents
@@ -17,11 +17,11 @@ def main (args : List String) : IO UInt32 := do
   let html ← IO.FS.readFile htmlPath
   let html := html.replace "</head>" "<link rel=\"stylesheet\" href=\"custom.css\">\n    </head>"
   let html := html.replace "Reveal.initialize({" "Reveal.initialize({\n        disableLayout: true,"
-  let titleSlideOld := "<section>\n          <h2>\n            Coherence of Type Classes in Lean</h2>\n          <p>\n            Paul Reichert, Lean FRO</p>\n          <p>\n            Lean FRO All-Hands, November 9, 2026</p>\n          </section>"
-  let titleSlideNew := "<section class=\"title-slide\">\n          <div class=\"top-area\"><img class=\"logo\" src=\"lean-logo-large.png\" alt=\"Lean Logo\"></div>\n          <div class=\"blue-band\"><h1>Coherence of Type Classes in Lean</h1>\n          <div class=\"meta\"><strong>Paul Reichert</strong><br>Lean FRO</div>\n          <div class=\"date\">Lean FRO All-Hands | November 9, 2026</div>\n          </div></section>"
+  let titleSlideOld := "<section><h2>Coherence of Type Classes in Lean</h2><p>Paul Reichert, Lean FRO</p><p>Lean FRO All-Hands, November 9, 2026</p></section>"
+  let titleSlideNew := "<section class=\"title-slide\"><div class=\"top-area\"><img class=\"logo\" src=\"lean-logo-large.png\" alt=\"Lean Logo\"></div><div class=\"blue-band\"><h1>Coherence of Type Classes in Lean</h1><div class=\"meta\"><strong>Paul Reichert</strong><br>Lean FRO</div><div class=\"date\">Lean FRO All-Hands | November 9, 2026</div></div></section>"
   let html := html.replace titleSlideOld titleSlideNew
   let slideHeader := "<div class=\"slide-header\"><img src=\"lean-logo.png\" alt=\"Lean\"></div>"
-  let html := html.replace "<section>\n" s!"<section>\n          {slideHeader}\n"
-  let html := html.replace "<section data-transition=\"fade\">\n" s!"<section data-transition=\"fade\">\n          {slideHeader}\n"
+  let html := html.replace "<section>" s!"<section>{slideHeader}"
+  let html := html.replace "<section data-transition=\"fade\">" s!"<section data-transition=\"fade\">{slideHeader}"
   IO.FS.writeFile htmlPath html
   return rc
